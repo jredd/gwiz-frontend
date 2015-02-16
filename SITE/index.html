@@ -2,9 +2,71 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Gwiz</title>
+
+    <link rel="stylesheet" href="css/flex.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body class="row">
+<script type="text/x-handlebars">
+    <div id="wrapper" class="row col-18 auto-margin no-float">
+        <main class="row col-24">
+            {{outlet}}
+        </main>
+    </div>
+</script>
+
+<script type="text/x-handlebars" id="index">
+    <ul>
+        {{#each item in model}}
+        <li>{{item}}</li>
+        {{/each}}
+    </ul>s
+</script>
+
+<!--LOGIN VIEW-->
+<script type="text/x-handlebars" id="login">
+    <div class="row top-buffer">
+        <div class="col-10 auto-margin no-float panel panel-default panel_authentication">
+            <form {{action "login" on="submit"}}>
+            <fieldset>
+                <legend class="push_bottom_15">Gwiz Login</legend>
+                {{#if login_failed}}
+                <div class="alert alert-danger">{{error_message}}</div>
+                {{/if}}
+
+                {{#if is_slow_connection}}
+                <div class="alert alert-info">The request seems to be taking more time than usual, please wait.</div>
+                {{/if}}
+                <div class="form-group">
+                    <label>EMAIL</label>
+                    <p class="input-group text-center ">
+                        {{input class='form-control' value=username type='email' placeholder='Username' required=''}}
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label>PASSWORD</label>
+                    <p class="input-group text-center">
+                        {{input class='form-control' value=password type='password' placeholder='Password' required=''}}
+                    </p>
+                </div>
+                <p class="text-center">
+                    <button type="submit" class="btn btn-white">LOGIN</button>
+                </p>
+            </fieldset>
+            </form>
+        </div>
+    </div>
+</script>
+
+
+<script src="js/libs/jquery-1.11.2.min.js"></script>
+<script src="js/libs/jquery.cookie-1.4.1.min.js"></script>
+<script src="js/libs/ember-template-compiler-1.10.0.js"></script>
+<script src="js/libs/ember.debug.js"></script>
+<script src="js/libs/ember-data.js"></script>
+<script src="js/libs/localstorage_adapter.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>
