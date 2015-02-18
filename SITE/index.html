@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Gwiz</title>
+    <title>Gwiz Front End</title>
 
     <link rel="stylesheet" href="css/flex.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -29,31 +29,29 @@
     <div class="row top-buffer">
         <div class="col-10 auto-margin no-float panel panel-default panel_authentication">
             <form {{action "login" on="submit"}}>
-            <fieldset>
-                <legend class="push_bottom_15">Gwiz Login</legend>
-                {{#if login_failed}}
-                <div class="alert alert-danger">{{error_message}}</div>
-                {{/if}}
+                <fieldset>
+                    <legend class="push_bottom_15">Gwiz Login</legend>
+                    {{#if login_failed}}
+                    <div class="alert alert-danger">{{error_message}}</div>
+                    {{/if}}
 
-                {{#if is_slow_connection}}
-                <div class="alert alert-info">The request seems to be taking more time than usual, please wait.</div>
-                {{/if}}
-                <div class="form-group">
-                    <label>EMAIL</label>
-                    <p class="input-group text-center ">
-                        {{input class='form-control' value=username type='email' placeholder='Username' required=''}}
-                    </p>
-                </div>
-                <div class="form-group">
-                    <label>PASSWORD</label>
-                    <p class="input-group text-center">
-                        {{input class='form-control' value=password type='password' placeholder='Password' required=''}}
-                    </p>
-                </div>
-                <p class="text-center">
-                    <button type="submit" class="btn btn-white">LOGIN</button>
-                </p>
-            </fieldset>
+                    {{#if is_slow_connection}}
+                    <div class="alert alert-info">The request seems to be taking more time than usual, please wait.</div>
+                    {{/if}}
+                    <div class="form-group">
+                        <label>EMAIL</label>
+                        <p class="input-group text-center ">
+                            {{input class='form-control input-lg' valueBinding=username type='email' value='jredd46@gmail.com' placeholder='Username' required=''}}
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label>PASSWORD</label>
+                        <p class="input-group text-center">
+                            {{input class='form-control input-lg' valueBinding=password type='password' value='r87835046' placeholder='Password' required=''}}
+                        </p>
+                    </div>
+                    <button type="submit" class="btn btn-white auto-margin no-float">LOGIN</button>
+                </fieldset>
             </form>
         </div>
     </div>
@@ -63,7 +61,7 @@
 <script src="js/libs/jquery-1.11.2.min.js"></script>
 <script src="js/libs/jquery.cookie-1.4.1.min.js"></script>
 <script src="js/libs/ember-template-compiler-1.10.0.js"></script>
-<script src="js/libs/ember.debug.js"></script>
+<script src="js/libs/ember.prod.js"></script>
 <script src="js/libs/ember-data.js"></script>
 <script src="js/libs/localstorage_adapter.js"></script>
 <script src="js/app.js"></script>

@@ -7,7 +7,7 @@ App = Ember.Application.create();
 
 // AUTHORIZATION HEADERS
 App.AuthorizationAdapter = DS.RESTAdapter.extend({
-  host: 'https://http://ec2-54-191-202-160.us-west-2.compute.amazonaws.com/',
+  host: 'http://ec2-54-191-202-160.us-west-2.compute.amazonaws.com/',
   headers: function(){
     return {'AUTHORIZATION': "Token "+ $.cookie('token')}
   }.property().volatile(),
@@ -106,25 +106,22 @@ App.LoginController = Ember.Controller.extend({
     $.cookie('token', this.get('token'), { expires:.25, path: '/' });
   }.observes('token'),
 
-  user_name: $.cookie('user_name'),
+  user_name: $.cookie('email'),
   user_name_changed: function() {
-    $.cookie('user_name', this.get('user_name'), { expires:.25, path: '/' });
-  }.observes('user_name'),
+    $.cookie('email', this.get('email'), { expires:.25, path: '/' });
+  }.observes('email'),
 
   actions: {
-    login: function() {
-
-      this.setProperties({
-        login_failed: false,
-        isProcessing: true
-      });
-      // Gather and post the authentication information
-      this.set('user_name', this.get('username'));
-      var data = this.getProperties('username', 'password');
-      this.set("timeout", setTimeout(this.slowConnection.bind(this), 5000));
-
-      //var request=$.getJSON('http://localhost:9080/api-token-auth/');
-      var request = jQuery.post('https://localhost:6080/api-token-auth/', data);
+      login: function() {
+          this.setProperties({
+              login_failed: false,
+              isProcessing: true
+          });
+          // Gather and post the authentication information
+          this.set('email', this.get('username'));
+          var data = this.getProperties('email', 'password');
+          this.set("timeout", setTimeout(this.slowConnection.bind(this), 5000));
+      var request = jQuery.post('http://ec2-54-191-202-160.us-west-2.compute.amazonaws.com/accounts/api-token-auth/', data);
       request.then(this.success.bind(this), this.failure.bind(this));
     }
   },
@@ -139,7 +136,7 @@ App.LoginController = Ember.Controller.extend({
       this.set('attemptedTransition', null)
     }else {
       // Redirect to 'articles' by default
-      this.transitionToRoute('projects')
+      this.transitionToRoute('index')
     }
   },
 
